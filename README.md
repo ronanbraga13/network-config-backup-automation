@@ -1,5 +1,7 @@
 # Network Config Backup Automation
 
+[![Status](https://img.shields.io/badge/status-LAB%20validated-success)](#resultados--results) [![Multi--vendor](https://img.shields.io/badge/network-multi--vendor-blue)](#vendors-e-plataformas-validados--validated-vendors-and-platforms) [![Oxidized](https://img.shields.io/badge/Oxidized-0.37.0-informational)](https://github.com/ytti/oxidized)
+
 > **PT-BR:** Projeto de laboratório para backup centralizado, versionamento, comparação e restauração de configurações de rede multi-vendor usando **Oxidized, Git e Linux**.  
 > **EN:** Lab project for centralized multi-vendor network configuration backup, versioning, comparison and restore using **Oxidized, Git and Linux**.
 
@@ -40,7 +42,9 @@ The architecture can be extended to other **firewalls, switches, routers and net
     └── netplan-mtu.example.yaml
 ```
 
+- [Quick Start](docs/quick-start.md)
 - [Arquitetura validada / Validated architecture](docs/architecture.md)
+- [Evidências de validação / Validation evidence](docs/evidence.md)
 - [Troubleshooting do LAB / Lab troubleshooting](docs/troubleshooting.md)
 - [Restore e recuperação / Restore workflow](docs/restore.md)
 - [Script de instalação / Installation script](scripts/01-install-oxidized.sh)
@@ -49,6 +53,22 @@ The architecture can be extended to other **firewalls, switches, routers and net
 Os scripts publicados foram preparados para portfólio e não contêm credenciais reais. O inventário e os exemplos de endereçamento são de laboratório/sanitizados.
 
 The published scripts are portfolio-safe and contain no real credentials. Inventory and addressing examples are lab-only/sanitized.
+
+## O que este projeto demonstra | What this project demonstrates
+
+Para recrutadores e lideranças técnicas, este projeto demonstra experiência prática em:
+
+- arquitetura de redes multi-site;
+- segurança e administração de firewalls;
+- troubleshooting de L2/L3, MTU/PMTU, SSH e serviços;
+- Linux e systemd;
+- automação com Shell;
+- versionamento e rastreabilidade com Git;
+- integração multi-vendor;
+- desenho de processos de backup e recuperação;
+- preocupação com segurança, escalabilidade e operação.
+
+For recruiters and technical leaders, this project demonstrates hands-on experience with **multi-site networking, firewall administration, Linux, troubleshooting, automation, Git-based configuration versioning, multi-vendor integration, and restore workflows**.
 
 ## Objetivos | Goals
 
