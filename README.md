@@ -82,7 +82,7 @@ For recruiters and technical leaders, this project demonstrates hands-on experie
 
 ## Arquitetura visual | Visual architecture
 
-![Topologia técnica do LAB](images/topology-lab.svg)
+![Topologia técnica do LAB](images/topology-lab.jpg)
 
 A topologia acima foi redesenhada a partir do ambiente real do **PNETLab**, preservando o desenho técnico do LAB e destacando os pontos principais: comunicação entre Matriz e filiais via **VPN IPsec**, redundância de links **CLARO/VIVO** e **roteamento dinâmico BGP** para failover entre caminhos.
 
