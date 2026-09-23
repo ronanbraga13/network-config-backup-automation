@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <style>
+      .bg{fill:#111820}.grid{stroke:#22303c;stroke-width:1}.panel{fill:#151f29;stroke:#3d5568;stroke-width:2}
+      .site{fill:none;stroke:#46647a;stroke-width:2;stroke-dasharray:8 6}.title{fill:#e8f0f7;font-family:Arial,sans-serif;font-size:28px;font-weight:700}
+      .subtitle{fill:#9fc3df;font-family:Arial,sans-serif;font-size:17px}.label{fill:#e6edf3;font-family:Arial,sans-serif;font-size:16px}
+      .small{fill:#b7c8d6;font-family:Arial,sans-serif;font-size:13px}.device{fill:#223342;stroke:#6b8ba3;stroke-width:2}
+      .firewall{fill:#5f1f26;stroke:#d55b66;stroke-width:2}.router{fill:#163b5a;stroke:#56a7db;stroke-width:2}.switch{fill:#17354a;stroke:#4b9ecb;stroke-width:2}
+      .server{fill:#2a333b;stroke:#8799a6;stroke-width:2}.link{stroke:#2997ff;stroke-width:3;fill:none}.vpn1{stroke:#3ddc84;stroke-width:4;fill:none;stroke-dasharray:10 7}
+      .vpn2{stroke:#f05b5b;stroke-width:4;fill:none;stroke-dasharray:10 7}.bgp{stroke:#ffd166;stroke-width:3;fill:none;stroke-dasharray:5 5}
+      .note{fill:#10171d;stroke:#496172;stroke-width:1.5}.accent{fill:#67c1ff}.ok{fill:#3ddc84}.warn{fill:#ffd166}
+    </style>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" class="grid"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" class="bg"/><rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
+
+  <rect x="34" y="28" width="680" height="96" rx="10" class="panel"/>
+  <text x="58" y="68" class="title">Network Config Backup Automation — Topologia do LAB</text>
+  <text x="58" y="99" class="subtitle">PNETLab • Multi-site • Multi-vendor • VPN IPsec redundante • BGP dinâmico</text>
+
+  <rect x="1160" y="28" width="405" height="98" rx="10" class="panel"/>
+  <text x="1182" y="58" class="label">Pontos técnicos demonstrados</text>
+  <text x="1182" y="84" class="small">• Filiais conectadas à Matriz por VPN IPsec</text>
+  <text x="1182" y="105" class="small">• Redundância de links e roteamento dinâmico BGP</text>
+
+  <!-- Sites -->
+  <rect x="40" y="170" width="430" height="365" rx="14" class="site"/>
+  <text x="58" y="198" class="subtitle">MATRIZ</text>
+  <rect x="1120" y="165" width="430" height="300" rx="14" class="site"/>
+  <text x="1138" y="193" class="subtitle">RIO DE JANEIRO</text>
+  <rect x="1120" y="545" width="430" height="300" rx="14" class="site"/>
+  <text x="1138" y="573" class="subtitle">MINAS GERAIS</text>
+
+  <!-- Matriz devices -->
+  <rect x="82" y="250" width="150" height="62" rx="8" class="server"/>
+  <text x="97" y="278" class="label">OXIDIZED</text><text x="97" y="299" class="small">Ubuntu + Git</text>
+  <rect x="82" y="345" width="150" height="62" rx="8" class="server"/>
+  <text x="97" y="373" class="label">FILE SERVER</text><text x="97" y="394" class="small">evolução / retenção</text>
+  <rect x="280" y="300" width="120" height="58" rx="8" class="switch"/>
+  <text x="301" y="334" class="label">SW-MTZ</text>
+  <rect x="300" y="425" width="120" height="62" rx="8" class="firewall"/>
+  <text x="321" y="453" class="label">FGT-MTZ</text><text x="320" y="475" class="small">FortiGate</text>
+  <path d="M232 280 L280 320" class="link"/><path d="M232 375 L280 340" class="link"/><path d="M340 358 L360 425" class="link"/>
+
+  <!-- Carrier routers -->
+  <rect x="620" y="300" width="130" height="64" rx="32" class="router"/>
+  <text x="655" y="338" class="label">CLARO</text>
+  <rect x="620" y="505" width="130" height="64" rx="32" class="router"/>
+  <text x="661" y="543" class="label">VIVO</text>
+  <path d="M420 450 L620 332" class="link"/><path d="M420 460 L620 537" class="link"/>
+  <path d="M685 364 L685 505" class="bgp"/>
+  <text x="707" y="433" class="small" fill="#ffd166">BGP / redundância</text>
+
+  <!-- Rio -->
+  <rect x="1190" y="255" width="120" height="64" rx="8" class="firewall"/>
+  <text x="1207" y="283" class="label">FGT-RIO</text><text x="1210" y="305" class="small">FortiGate</text>
+  <rect x="1370" y="258" width="120" height="58" rx="8" class="switch"/>
+  <text x="1394" y="292" class="label">SW-RIO</text>
+  <rect x="1370" y="355" width="120" height="58" rx="8" class="server"/>
+  <text x="1401" y="389" class="label">Hosts</text>
+  <path d="M1310 287 L1370 287" class="link"/><path d="M1430 316 L1430 355" class="link"/>
+
+  <!-- Minas -->
+  <rect x="1190" y="635" width="120" height="64" rx="8" class="firewall"/>
+  <text x="1202" y="663" class="label">PFSENSE</text><text x="1211" y="685" class="small">Firewall MG</text>
+  <rect x="1370" y="638" width="120" height="58" rx="8" class="switch"/>
+  <text x="1395" y="672" class="label">SW-MG</text>
+  <rect x="1370" y="735" width="120" height="58" rx="8" class="server"/>
+  <text x="1401" y="769" class="label">Hosts</text>
+  <path d="M1310 667 L1370 667" class="link"/><path d="M1430 696 L1430 735" class="link"/>
+
+  <!-- Underlay transport links -->
+  <path d="M750 332 L1190 275" class="link"/><path d="M750 537 L1190 295" class="link"/>
+  <path d="M750 332 L1190 655" class="link"/><path d="M750 537 L1190 675" class="link"/>
+
+  <!-- VPN overlays -->
+  <path d="M420 445 C700 220 930 210 1190 275" class="vpn1"/>
+  <path d="M420 462 C690 485 955 420 1190 295" class="vpn2"/>
+  <path d="M420 445 C710 520 930 580 1190 655" class="vpn1"/>
+  <path d="M420 462 C710 650 930 700 1190 675" class="vpn2"/>
+
+  <!-- BGP note -->
+  <rect x="800" y="392" width="260" height="110" rx="10" class="note"/>
+  <text x="820" y="423" class="label">Roteamento dinâmico BGP</text>
+  <text x="820" y="450" class="small">• anúncios entre sites</text>
+  <text x="820" y="473" class="small">• failover entre CLARO e VIVO</text>
+  <text x="820" y="496" class="small">• convergência após falha de link</text>
+
+  <!-- Oxidized collection arrows -->
+  <path d="M157 312 C220 570 650 760 1190 667" class="vpn1" opacity=".8"/>
+  <path d="M157 312 C290 100 850 90 1190 287" class="vpn1" opacity=".8"/>
+  <text x="505" y="765" class="small" fill="#3ddc84">Coleta centralizada de configurações via SSH/Telnet (LAB)</text>
+
+  <!-- Legend -->
+  <rect x="40" y="610" width="390" height="220" rx="12" class="panel"/>
+  <text x="60" y="642" class="label">Legenda</text>
+  <line x1="64" y1="676" x2="130" y2="676" class="link"/><text x="148" y="682" class="small">Link de transporte / LAN</text>
+  <line x1="64" y1="710" x2="130" y2="710" class="vpn1"/><text x="148" y="716" class="small">VPN IPsec — caminho CLARO</text>
+  <line x1="64" y1="744" x2="130" y2="744" class="vpn2"/><text x="148" y="750" class="small">VPN IPsec — caminho VIVO</text>
+  <line x1="64" y1="778" x2="130" y2="778" class="bgp"/><text x="148" y="784" class="small">Sessão / redundância BGP</text>
+  <text x="60" y="816" class="small">Arquitetura derivada da topologia real do PNETLab.</text>
+
+  <text x="1175" y="874" class="small">Ronan Braga • Portfólio Técnico • LAB sanitizado</text>
+</svg>
