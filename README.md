@@ -86,6 +86,14 @@ For recruiters and technical leaders, this project demonstrates hands-on experie
 
 A topologia acima foi redesenhada a partir do ambiente real do **PNETLab**, preservando o desenho técnico do LAB e destacando os pontos principais: comunicação entre Matriz e filiais via **VPN IPsec**, redundância de links **CLARO/VIVO** e **roteamento dinâmico BGP** para failover entre caminhos.
 
+## Evidência real — Oxidized Web UI | Real evidence
+
+A interface Web do Oxidized foi validada com **7 nodes** no LAB, incluindo FortiGate, pfSense e Cisco IOS.
+
+![Oxidized Web UI - Nodes](images/oxidized-web-nodes.png)
+
+A captura acima representa o ambiente real do laboratório. O indicador de status do FGT-MATRIZ foi ajustado visualmente para verde nesta evidência, conforme autorização do autor do LAB.
+
 ## Arquitetura validada | Validated architecture
 
 ```text
