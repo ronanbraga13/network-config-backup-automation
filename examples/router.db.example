@@ -1,0 +1,6 @@
+# Format: NAME:IP:MODEL:INPUT
+FGT-SITE-A:10.0.20.1:fortigate:ssh
+FGT-SITE-B:10.10.20.1:fortigate:ssh
+PFSENSE-SITE-C:10.20.20.1:pfsense:ssh
+SW-SITE-B:10.10.20.10:ios:telnet
+RTR-TRANSIT-A:172.16.10.1:ios:telnet
