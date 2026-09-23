@@ -1,0 +1,9 @@
+# PNETLab-specific example only.
+# Do not apply MTU 1496 in production without PMTU/MTU validation.
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+      mtu: 1496
