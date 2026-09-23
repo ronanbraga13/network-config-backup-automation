@@ -2,7 +2,7 @@
 
 ## Topologia técnica sanitizada
 
-![Topologia técnica do LAB](../images/topology-lab.jpg)
+![Topologia técnica do LAB](../images/topology-lab.png)
 
 A imagem de arquitetura foi preparada a partir da topologia real do PNETLab e contém somente informações de laboratório. Evidências operacionais adicionais devem permanecer screenshots reais, com informações sensíveis ocultadas quando necessário.
 
