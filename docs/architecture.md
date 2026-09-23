@@ -1,6 +1,6 @@
 # Arquitetura do LAB | Lab Architecture
 
-![Topologia técnica do LAB](../images/topology-lab.svg)
+![Topologia técnica do LAB](../images/topology-lab.jpg)
 
 > Diagrama técnico derivado da topologia real do PNETLab. O desenho destaca VPN IPsec redundante entre sites e roteamento dinâmico BGP para failover.
 
