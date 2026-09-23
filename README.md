@@ -80,6 +80,12 @@ For recruiters and technical leaders, this project demonstrates hands-on experie
 - Validar procedimentos reais de restauração.
 - Criar uma base simples para futura automação, retenção e integração com storage externo.
 
+## Arquitetura visual | Visual architecture
+
+![Topologia técnica do LAB](images/topology-lab.svg)
+
+A topologia acima foi redesenhada a partir do ambiente real do **PNETLab**, preservando o desenho técnico do LAB e destacando os pontos principais: comunicação entre Matriz e filiais via **VPN IPsec**, redundância de links **CLARO/VIVO** e **roteamento dinâmico BGP** para failover entre caminhos.
+
 ## Arquitetura validada | Validated architecture
 
 ```text
