@@ -1,5 +1,12 @@
 # Evidências de validação | Validation Evidence
 
+## Topologia técnica sanitizada
+
+![Topologia técnica do LAB](../images/topology-lab.svg)
+
+A imagem de arquitetura foi preparada a partir da topologia real do PNETLab e contém somente informações de laboratório. Evidências operacionais adicionais devem permanecer screenshots reais, com informações sensíveis ocultadas quando necessário.
+
+
 Este documento consolida as evidências técnicas obtidas durante o LAB. As capturas de tela originais permanecem fora do repositório até passarem por revisão final de exposição de dados.
 
 ## 1. Coleta multi-vendor
