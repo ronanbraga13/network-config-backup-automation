@@ -23,6 +23,33 @@ A arquitetura é extensível a outros **firewalls, switches, routers e dispositi
 
 The architecture can be extended to other **firewalls, switches, routers and network devices supported by Oxidized**.
 
+## Conteúdo do repositório | Repository contents
+
+```text
+.
+├── README.md
+├── docs/
+│   ├── architecture.md
+│   ├── troubleshooting.md
+│   └── restore.md
+├── scripts/
+│   ├── 01-install-oxidized.sh
+│   └── 02-configure-oxidized.sh
+└── examples/
+    ├── router.db.example
+    └── netplan-mtu.example.yaml
+```
+
+- [Arquitetura validada / Validated architecture](docs/architecture.md)
+- [Troubleshooting do LAB / Lab troubleshooting](docs/troubleshooting.md)
+- [Restore e recuperação / Restore workflow](docs/restore.md)
+- [Script de instalação / Installation script](scripts/01-install-oxidized.sh)
+- [Script de configuração / Configuration script](scripts/02-configure-oxidized.sh)
+
+Os scripts publicados foram preparados para portfólio e não contêm credenciais reais. O inventário e os exemplos de endereçamento são de laboratório/sanitizados.
+
+The published scripts are portfolio-safe and contain no real credentials. Inventory and addressing examples are lab-only/sanitized.
+
 ## Objetivos | Goals
 
 - Centralizar backups de configurações de rede.
