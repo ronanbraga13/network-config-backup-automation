@@ -85,6 +85,8 @@ O servidor Oxidized está posicionado na rede de monitoramento da Matriz e alcan
 
 ## Fluxo de coleta
 
+O LAB passou a validar dois tipos de saída operacional por grupo:
+
 ```text
 Dispositivo
    |
@@ -92,19 +94,24 @@ Dispositivo
    v
 Oxidized
    |
-   +--> normalização pelo model
+   +--> Git por grupo
+   |      `-- histórico / diff
    |
-   +--> Git local (histórico)
+   +--> arquivo atual por grupo
+   |      `-- SCP / WinSCP / File Server
    |
-   +--> Web UI (consulta / diff / coleta manual)
+   `--> Web UI
+          `-- status / consulta / coleta manual
 ```
+
+O script `04-configure-oxidized-groups-git-and-files.sh` implementa esse modelo e pode ser executado diretamente após o `01-install-oxidized.sh`.
 
 ## Estrutura de inventário
 
-O LAB evoluiu para permitir protocolo por node:
+O LAB evoluiu para permitir protocolo e grupo por node:
 
 ```text
-NAME:IP:MODEL:INPUT
+NAME:IP:MODEL:INPUT:GROUP
 ```
 
 Exemplos sanitizados:
@@ -117,13 +124,23 @@ SW-SITE-B:10.20.20.10:ios:telnet
 
 ## Armazenamento
 
-O repositório Git local utilizado pelo Oxidized é um **bare repository**:
+No modo com grupos + Git + Files, a estrutura validada é:
 
 ```text
-/home/oxidized/.config/oxidized/oxidized.git
+/home/oxidized/.config/oxidized/
+├── git-repos/
+│   ├── GRP_MATRIZ.git
+│   ├── GRP_RIO.git
+│   ├── GRP_MINAS.git
+│   └── GRP_OPERADORAS.git
+└── configs/
+    ├── GRP_MATRIZ/
+    ├── GRP_RIO/
+    ├── GRP_MINAS/
+    └── GRP_OPERADORAS/
 ```
 
-As configurações não aparecem como arquivos comuns em diretórios separados. Elas são mantidas como objetos e commits Git e podem ser recuperadas por node e versão.
+Os repositórios Git guardam histórico e diff; as pastas `configs` mantêm a cópia atual para operação via SCP/WinSCP.
 
 ## Escalabilidade
 
@@ -139,3 +156,14 @@ Para um cenário produtivo com centenas de equipamentos, a arquitetura deve incl
 - gestão segura de credenciais.
 
 Este LAB valida a arquitetura e o fluxo operacional. Dimensionamento de produção deve considerar volume, frequência de coleta e tamanho médio das configurações.
+
+
+## Consideração de backup por vendor
+
+A possibilidade de coletar uma configuração não garante, por si só, que o arquivo contenha tudo o que é necessário para disaster recovery.
+
+No FortiGate, o LAB identificou que a visibilidade da configuração depende do perfil administrativo da conta usada pelo Oxidized. Uma conta restrita não apresentou todos os administradores em `show system admin`.
+
+O pfSense teve backup e restore validados no cenário testado. Outros vendors devem passar por validação própria de restore antes de uso produtivo.
+
+A próxima etapa do estudo FortiGate será comparar a coleta do Oxidized com o mecanismo nativo de backup automatizado para servidor SFTP.
