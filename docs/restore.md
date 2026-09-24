@@ -40,6 +40,14 @@ config system global
 
 O arquivo ajustado foi aceito no FortiGate do laboratório.
 
+### Limitação de permissões identificada
+
+No LAB foi identificado que a coleta do FortiGate depende do nível de acesso da conta administrativa utilizada pelo Oxidized. Com uma conta restrita, `show system admin` exibiu somente a própria conta de coleta.
+
+Isso significa que um arquivo coletado com sucesso pode ainda estar incompleto para fins de disaster recovery. Antes de tratar o arquivo como backup restaurável completo, valide a conta de coleta e execute teste de restore.
+
+Uma nova validação será realizada com `oxidized_backup` como `super_admin`, restrito por trusted host.
+
 ### Cuidados
 
 Antes de qualquer restore real, validar:
@@ -102,4 +110,8 @@ sudo -u oxidized git \
 
 ## Limites desta validação
 
-Os restores foram validados em ambiente controlado PNETLab. O resultado comprova o procedimento no cenário testado, mas não substitui testes de compatibilidade e processos de mudança em produção.
+Os restores foram validados em ambiente controlado PNETLab. O resultado comprova o procedimento apenas nos cenários efetivamente testados.
+
+O pfSense teve o fluxo de backup/restore validado. No FortiGate, a nova descoberta sobre visibilidade condicionada às permissões da conta exige uma validação adicional com conta dedicada de privilégio adequado antes de considerar o backup completo. Outros vendors devem ser testados individualmente.
+
+Próxima evolução planejada: backup nativo automatizado do FortiGate com envio direto para servidor via SFTP.
