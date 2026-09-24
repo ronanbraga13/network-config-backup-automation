@@ -1,0 +1,10 @@
+# Oxidized grouped inventory example
+# Format: NAME:IP:MODEL:INPUT:GROUP
+# Sanitized lab-only examples.
+
+FGT-SITE-A:10.0.20.1:fortigate:ssh:GRP_SITE_A
+FGT-SITE-B:10.10.20.1:fortigate:ssh:GRP_SITE_B
+PFSENSE-SITE-C:10.20.20.1:pfsense:ssh:GRP_SITE_C
+SW-SITE-B:10.10.20.10:ios:telnet:GRP_SITE_B
+RTR-ISP-A:172.16.10.1:ios:telnet:GRP_OPERATORS
+RTR-ISP-B:172.16.20.1:ios:telnet:GRP_OPERATORS
