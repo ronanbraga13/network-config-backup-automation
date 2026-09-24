@@ -68,7 +68,7 @@ O arquivo coletado foi:
 3. ajustado para manter o cabeçalho nativo FortiOS;
 4. importado em um FortiGate do LAB.
 
-Resultado: **restore validado no cenário testado**.
+Resultado: **restore validado no cenário testado**, porém a completude da coleta FortiGate passou a exigir validação adicional após a descoberta sobre permissões da conta administrativa.
 
 ## 5. Restore pfSense
 
