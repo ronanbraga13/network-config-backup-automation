@@ -111,7 +111,47 @@ Durante o projeto foram diagnosticados e tratados:
 
 Detalhes: [troubleshooting.md](troubleshooting.md).
 
-## 8. Política de publicação das imagens
+## 8. Grupos e saída Git + Files
+
+Foi validada a organização dos nodes por grupos:
+
+- `GRP_MATRIZ`
+- `GRP_RIO`
+- `GRP_MINAS`
+- `GRP_OPERADORAS`
+
+Também foi validado o uso simultâneo de:
+
+- repositórios Git por grupo para histórico e diff;
+- arquivos atuais por grupo para cópia via SCP/WinSCP.
+
+Estrutura esperada:
+
+```text
+git-repos/
+├── GRP_MATRIZ.git
+├── GRP_RIO.git
+├── GRP_MINAS.git
+└── GRP_OPERADORAS.git
+
+configs/
+├── GRP_MATRIZ/
+├── GRP_RIO/
+├── GRP_MINAS/
+└── GRP_OPERADORAS/
+```
+
+## 9. Limitação identificada no FortiGate
+
+Durante o teste com conta administrativa restrita, `show system admin` apresentou somente a própria conta de coleta. Isso comprovou que a configuração obtida depende das permissões do usuário usado pelo Oxidized.
+
+A conta `oxidized_backup` foi posteriormente promovida no LAB para `super_admin` e restringida por trusted host para uma nova rodada de validação. Esse novo teste ainda deve ser concluído antes de afirmar que a coleta é completa para disaster recovery.
+
+O pfSense teve backup e restore validados sem essa limitação no cenário testado.
+
+Para outros vendors, a recomendação é validar coleta e restore individualmente antes de uso produtivo.
+
+## 10. Política de publicação das imagens
 
 Antes de publicar screenshots em um repositório público, revisar e remover quando aplicável:
 
