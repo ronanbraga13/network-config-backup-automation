@@ -41,6 +41,7 @@ The architecture can be extended to other **firewalls, switches, routers and net
 │   └── 04-configure-oxidized-groups-git-and-files.sh
 └── examples/
     ├── router.db.example
+    ├── router.db.groups.example
     └── netplan-mtu.example.yaml
 ```
 
