@@ -36,7 +36,9 @@ The architecture can be extended to other **firewalls, switches, routers and net
 │   └── restore.md
 ├── scripts/
 │   ├── 01-install-oxidized.sh
-│   └── 02-configure-oxidized.sh
+│   ├── 02-configure-oxidized.sh
+│   ├── 03-configure-oxidized-groups-files.sh
+│   └── 04-configure-oxidized-groups-git-and-files.sh
 └── examples/
     ├── router.db.example
     └── netplan-mtu.example.yaml
@@ -48,11 +50,24 @@ The architecture can be extended to other **firewalls, switches, routers and net
 - [Troubleshooting do LAB / Lab troubleshooting](docs/troubleshooting.md)
 - [Restore e recuperação / Restore workflow](docs/restore.md)
 - [Script de instalação / Installation script](scripts/01-install-oxidized.sh)
-- [Script de configuração / Configuration script](scripts/02-configure-oxidized.sh)
+- [Configuração por host + Git](scripts/02-configure-oxidized.sh)
+- [Configuração por grupos + arquivos](scripts/03-configure-oxidized-groups-files.sh)
+- [Configuração por grupos + Git + arquivos](scripts/04-configure-oxidized-groups-git-and-files.sh)
 
 Os scripts publicados foram preparados para portfólio e não contêm credenciais reais. O inventário e os exemplos de endereçamento são de laboratório/sanitizados.
 
 The published scripts are portfolio-safe and contain no real credentials. Inventory and addressing examples are lab-only/sanitized.
+
+## Modos de implantação | Deployment modes
+
+Após executar `01-install-oxidized.sh`, o ambiente pode seguir diretamente para o modelo que atende à operação:
+
+- `02-configure-oxidized.sh` — inventário por host com histórico em **Git**.
+- `03-configure-oxidized-groups-files.sh` — inventário por **grupo/cliente** com arquivos atuais separados por pasta.
+- `04-configure-oxidized-groups-git-and-files.sh` — inventário por **grupo/cliente**, histórico e diff em **Git** e cópia atual em arquivo para facilitar SCP/WinSCP.
+
+O script `04` é independente dos scripts `02` e `03`: o fluxo pode ser diretamente `01 -> 04`.
+
 
 ## O que este projeto demonstra | What this project demonstrates
 
@@ -201,6 +216,14 @@ TCP/8888
 
 ## Restore validado | Validated restore
 
+### Observação importante sobre FortiGate
+
+Durante a evolução do LAB foi identificado que a configuração coletada pelo Oxidized é limitada pela visibilidade do usuário administrativo utilizado na coleta. No teste com uma conta restrita, `show system admin` exibiu somente a própria conta de coleta, omitindo administradores com privilégios superiores.
+
+Por isso, uma coleta bem-sucedida no FortiGate **não deve ser tratada automaticamente como backup completo para disaster recovery** sem validar o perfil administrativo e executar teste de restore. No LAB seguinte, a conta dedicada `oxidized_backup` será testada como `super_admin` com restrição por trusted host.
+
+No script `04`, o modelo FortiGate utiliza `fullconfig: true`, mas a visibilidade continua dependendo das permissões da conta.
+
 ### FortiGate
 
 O conteúdo coletado pelo Oxidized foi exportado para `.conf`, ajustado para manter apenas o cabeçalho compatível com o FortiOS e utilizado com sucesso em um teste de restauração no ambiente de laboratório.
@@ -270,7 +293,9 @@ Algumas imagens IOL do LAB não ofereciam suporte SSH adequado ou exigiam algori
 - Política de retenção para ambientes de maior escala.
 - Export automático de configurações prontas para restore.
 - HTTPS para a Web UI.
-- Separação por grupos/clientes.
+- Validar coleta FortiGate com conta dedicada `super_admin` restrita por trusted host.
+- Automatizar backup nativo do FortiGate diretamente para servidor via **SFTP**.
+- Validar restore em outros vendors antes de considerar o backup completo.
 - Inclusão de outros vendors suportados pelo Oxidized.
 - Monitoramento de falhas de coleta e capacidade de disco.
 
