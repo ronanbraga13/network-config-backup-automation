@@ -282,7 +282,7 @@ Algumas imagens IOL do LAB não ofereciam suporte SSH adequado ou exigiam algori
 - ✅ 7 nodes em ambiente multi-site.
 - ✅ FortiGate, Cisco IOS e pfSense integrados.
 - ✅ SSH e input por node validados.
-- ✅ Restore de FortiGate validado.
+- ⚠️ Restore de FortiGate validado no cenário testado; validação adicional de completude está pendente após a descoberta sobre permissões da conta de coleta.
 - ✅ Restore de pfSense via XML validado.
 - ✅ Persistência do MTU do LAB validada.
 
