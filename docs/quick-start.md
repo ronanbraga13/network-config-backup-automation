@@ -16,28 +16,42 @@ Execute:
 sudo bash scripts/01-install-oxidized.sh
 ```
 
-## 2. Configurar Oxidized
+## 2. Escolher o modelo de configuração
+
+Após o `01-install-oxidized.sh`, escolha apenas um dos fluxos:
+
+### Host + Git
 
 ```bash
 sudo bash scripts/02-configure-oxidized.sh
 ```
 
-O script solicita:
+### Grupos + arquivos
 
-- usuário padrão dos devices;
-- senha;
-- nome do primeiro node;
-- IP de gerenciamento;
-- model Oxidized;
-- input (`ssh` ou `telnet`);
-- intervalo de coleta.
+```bash
+sudo bash scripts/03-configure-oxidized-groups-files.sh
+```
+
+### Grupos + Git + arquivos
+
+```bash
+sudo bash scripts/04-configure-oxidized-groups-git-and-files.sh
+```
+
+O fluxo `01 -> 04` é suportado diretamente; não é necessário executar `02` ou `03` antes do `04`.
 
 ## 3. Inventário
 
-Formato:
+Formato base por host:
 
 ```text
 NAME:IP:MODEL:INPUT
+```
+
+Nos modos por grupo (`03` e `04`):
+
+```text
+NAME:IP:MODEL:INPUT:GROUP
 ```
 
 Exemplo:
@@ -81,7 +95,20 @@ sudo -u oxidized git \
   log --oneline --all
 ```
 
-## 7. Próximos passos
+## 7. Atenção com FortiGate
+
+A coleta do FortiGate respeita as permissões da conta administrativa usada pelo Oxidized. No LAB, uma conta restrita não apresentou todos os administradores em `show system admin`.
+
+Para uso como backup completo de recuperação:
+
+- valide a visibilidade da conta;
+- aplique o princípio de menor privilégio compatível com o objetivo;
+- restrinja origem/trusted hosts quando aplicável;
+- faça teste real de restore antes de produção.
+
+O restore do pfSense foi validado no LAB. Outros vendors devem ser testados individualmente.
+
+## 8. Próximos passos
 
 - adicionar os demais nodes;
 - validar coleta de cada model;
