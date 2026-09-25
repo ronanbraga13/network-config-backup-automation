@@ -87,7 +87,43 @@ No LAB a interface foi publicada diretamente em TCP/8888.
 
 > Em produção, use controles de acesso e HTTPS/reverse proxy conforme o padrão da organização.
 
-## 6. Validar Git
+
+## 6. Arquivos de backup atuais
+
+No modo **Grupos + Git + arquivos**, os backups atuais ficam em:
+
+```text
+/home/oxidized/.config/oxidized/configs/
+```
+
+Listar:
+
+```bash
+find /home/oxidized/.config/oxidized/configs -maxdepth 2 -type f
+```
+
+Exemplo:
+
+```text
+/home/oxidized/.config/oxidized/configs/GRP_RIO/SW-RIO-01
+```
+
+Para copiar um backup para sua máquina local via SCP:
+
+```bash
+scp usuario@IP_DO_SERVIDOR:/home/oxidized/.config/oxidized/configs/GRP_RIO/SW-RIO-01 .
+```
+
+Para copiar um grupo inteiro:
+
+```bash
+scp -r usuario@IP_DO_SERVIDOR:/home/oxidized/.config/oxidized/configs/GRP_RIO .
+```
+
+No Windows, o mesmo caminho pode ser acessado via WinSCP.
+
+
+## 7. Validar Git
 
 ```bash
 sudo -u oxidized git \
@@ -95,7 +131,7 @@ sudo -u oxidized git \
   log --oneline --all
 ```
 
-## 7. Atenção com FortiGate
+## 8. Atenção com FortiGate
 
 A coleta do FortiGate respeita as permissões da conta administrativa usada pelo Oxidized. No LAB, uma conta restrita não apresentou todos os administradores em `show system admin`.
 
@@ -108,7 +144,7 @@ Para uso como backup completo de recuperação:
 
 O restore do pfSense foi validado no LAB. Outros vendors devem ser testados individualmente.
 
-## 8. Próximos passos
+## 9. Próximos passos
 
 - adicionar os demais nodes;
 - validar coleta de cada model;
