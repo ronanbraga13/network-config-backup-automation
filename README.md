@@ -176,6 +176,54 @@ pfsense:ssh
 ios:telnet
 ```
 
+
+## Onde ficam os backups atuais | Current backup files
+
+No fluxo recomendado com **grupos + Git + arquivos** (`04-configure-oxidized-groups-git-and-files.sh`), a cópia atual de cada configuração fica em:
+
+```text
+/home/oxidized/.config/oxidized/configs/
+```
+
+Os arquivos são organizados por grupo. Exemplo:
+
+```text
+/home/oxidized/.config/oxidized/configs/GRP_RIO/SW-RIO-01
+/home/oxidized/.config/oxidized/configs/GRP_MINAS/SW-MG-01
+/home/oxidized/.config/oxidized/configs/GRP_OPERADORAS/RTR-CLARO
+```
+
+Para localizar rapidamente:
+
+```bash
+find /home/oxidized/.config/oxidized/configs -maxdepth 2 -type f
+```
+
+### Copiar um backup para a máquina local com SCP
+
+É possível transferir os arquivos diretamente do servidor Oxidized para uma máquina local usando **SCP**.
+
+Exemplo executado na máquina local:
+
+```bash
+scp usuario@IP_DO_SERVIDOR:/home/oxidized/.config/oxidized/configs/GRP_RIO/SW-RIO-01 .
+```
+
+Para copiar uma pasta inteira de um grupo:
+
+```bash
+scp -r usuario@IP_DO_SERVIDOR:/home/oxidized/.config/oxidized/configs/GRP_RIO .
+```
+
+Em Windows também é possível usar clientes como **WinSCP**, apontando para o mesmo caminho:
+
+```text
+/home/oxidized/.config/oxidized/configs/
+```
+
+> O usuário usado no SCP precisa ter permissão de leitura nos arquivos. Em produção, prefira SSH/SCP com controle de acesso adequado e evite expor a conta de serviço `oxidized` diretamente.
+
+
 ## Coleta e versionamento | Collection and versioning
 
 A periodicidade é controlada pelo parâmetro `interval`:
