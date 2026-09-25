@@ -61,7 +61,92 @@ Antes de qualquer restore real, validar:
 - janela de mudança;
 - rollback.
 
+
 ---
+
+## Cisco IOS — restore validado com VLANs e SVI
+
+Durante o teste destrutivo do switch Cisco IOS, foi identificado que o `running-config` sozinho não era suficiente para reconstruir completamente um equipamento zerado em todos os cenários.
+
+Em VTP Server, as VLANs podem estar armazenadas fora do `running-config` (por exemplo, na VLAN database). Além disso, uma SVI operacional pode não trazer um `no shutdown` explícito no conteúdo coletado.
+
+Para tratar esses dois pontos, o projeto inclui um modelo IOS customizado em:
+
+```text
+models/ios.rb
+```
+
+O modelo mantém a coleta padrão do Cisco IOS e adiciona:
+
+- `show vlan brief`, convertido automaticamente em comandos `vlan <id>` e `name <nome>`;
+- `show ip interface brief`, usado para gerar `no shutdown` para SVIs que estavam `up/up` no momento da coleta;
+- o `show running-config` normal do Oxidized.
+
+Exemplo do conteúdo restaurável gerado:
+
+```text
+! ===== VLAN CONFIG =====
+vlan 10
+ name VLAN0010
+!
+vlan 20
+ name VLAN0020
+!
+vlan 30
+ name VLAN0030
+!
+! ===== END VLAN CONFIG =====
+
+! ===== SVI STATE CONFIG =====
+interface Vlan20
+ no shutdown
+!
+! ===== END SVI STATE CONFIG =====
+```
+
+### Teste de recuperação realizado
+
+O `SW_RIO_01` foi removido do LAB e recriado zerado. A restauração foi realizada a partir do backup coletado pelo Oxidized:
+
+```text
+enable
+configure terminal
+<colar configuração coletada>
+end
+write memory
+```
+
+Após a restauração foram validados:
+
+- VLANs 10, 20 e 30;
+- portas access nas VLANs correspondentes;
+- trunk 802.1Q com VLANs 10,20,30;
+- SVI Vlan20 com endereço de gerenciamento;
+- SVI `up/up` sem intervenção manual adicional;
+- convergência de Spanning Tree;
+- conectividade ICMP com o gateway;
+- retorno do equipamento à coleta do Oxidized.
+
+O segundo teste de ping apresentou 100% de sucesso após a convergência da camada 2.
+
+### Instalação como modelo IOS padrão
+
+Faça backup do model original da versão instalada antes de substituí-lo. No LAB com Oxidized 0.37.0:
+
+```bash
+OXIDIZED_MODEL_DIR="/var/lib/gems/3.0.0/gems/oxidized-0.37.0/lib/oxidized/model"
+
+cp "$OXIDIZED_MODEL_DIR/ios.rb" "$OXIDIZED_MODEL_DIR/ios.rb.original"
+cp models/ios.rb "$OXIDIZED_MODEL_DIR/ios.rb"
+
+ruby -c "$OXIDIZED_MODEL_DIR/ios.rb"
+systemctl restart oxidized
+```
+
+Com o modelo instalado como `ios.rb`, os equipamentos permanecem usando `ios` no `router.db`; não é necessário manter o identificador temporário `ios_restore`.
+
+> A substituição dentro do diretório da gem pode ser sobrescrita por upgrade/reinstalação do Oxidized. O arquivo versionado neste repositório é a cópia de referência para reaplicação e auditoria.
+
 
 ## pfSense
 
