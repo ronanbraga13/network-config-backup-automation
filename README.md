@@ -34,6 +34,8 @@ The architecture can be extended to other **firewalls, switches, routers and net
 │   ├── architecture.md
 │   ├── troubleshooting.md
 │   └── restore.md
+├── models/
+│   └── ios.rb
 ├── scripts/
 │   ├── 01-install-oxidized.sh
 │   ├── 02-configure-oxidized.sh
@@ -50,6 +52,7 @@ The architecture can be extended to other **firewalls, switches, routers and net
 - [Evidências de validação / Validation evidence](docs/evidence.md)
 - [Troubleshooting do LAB / Lab troubleshooting](docs/troubleshooting.md)
 - [Restore e recuperação / Restore workflow](docs/restore.md)
+- [Modelo Cisco IOS DR-ready / DR-ready Cisco IOS model](models/ios.rb)
 - [Script de instalação / Installation script](scripts/01-install-oxidized.sh)
 - [Configuração por host + Git](scripts/02-configure-oxidized.sh)
 - [Configuração por grupos + arquivos](scripts/03-configure-oxidized-groups-files.sh)
@@ -229,6 +232,12 @@ No script `04`, o modelo FortiGate utiliza `fullconfig: true`, mas a visibilidad
 
 O conteúdo coletado pelo Oxidized foi exportado para `.conf`, ajustado para manter apenas o cabeçalho compatível com o FortiOS e utilizado com sucesso em um teste de restauração no ambiente de laboratório.
 
+### Cisco IOS
+
+Foi realizado um teste destrutivo de recuperação do `SW_RIO_01` a partir de um equipamento zerado. O modelo IOS do projeto foi estendido para transformar a VLAN database em comandos restauráveis e preservar o estado administrativo das SVIs ativas.
+
+O restore recuperou VLANs, portas access, trunk 802.1Q, SVI de gerenciamento, estado `up/up`, convergência de STP e conectividade com o gateway. O modelo validado está em [`models/ios.rb`](models/ios.rb).
+
 ### pfSense
 
 A configuração coletada pelo Oxidized foi apresentada em **XML** pela interface Web.
@@ -284,6 +293,7 @@ Algumas imagens IOL do LAB não ofereciam suporte SSH adequado ou exigiam algori
 - ✅ FortiGate, Cisco IOS e pfSense integrados.
 - ✅ SSH e input por node validados.
 - ⚠️ Restore de FortiGate validado no cenário testado; validação adicional de completude está pendente após a descoberta sobre permissões da conta de coleta.
+- ✅ Restore de Cisco IOS validado após perda total do switch, incluindo VLAN database e estado de SVI.
 - ✅ Restore de pfSense via XML validado.
 - ✅ Persistência do MTU do LAB validada.
 
