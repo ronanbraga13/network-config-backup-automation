@@ -40,7 +40,8 @@ The architecture can be extended to other **firewalls, switches, routers and net
 │   ├── 01-install-oxidized.sh
 │   ├── 02-configure-oxidized.sh
 │   ├── 03-configure-oxidized-groups-files.sh
-│   └── 04-configure-oxidized-groups-git-and-files.sh
+│   ├── 04-configure-oxidized-groups-git-and-files.sh
+│   └── 05-install-ios-dr-model.sh
 └── examples/
     ├── router.db.example
     ├── router.db.groups.example
@@ -57,6 +58,7 @@ The architecture can be extended to other **firewalls, switches, routers and net
 - [Configuração por host + Git](scripts/02-configure-oxidized.sh)
 - [Configuração por grupos + arquivos](scripts/03-configure-oxidized-groups-files.sh)
 - [Configuração por grupos + Git + arquivos](scripts/04-configure-oxidized-groups-git-and-files.sh)
+- [Instalação do modelo Cisco IOS DR-ready](scripts/05-install-ios-dr-model.sh)
 
 Os scripts publicados foram preparados para portfólio e não contêm credenciais reais. O inventário e os exemplos de endereçamento são de laboratório/sanitizados.
 
@@ -69,8 +71,9 @@ Após executar `01-install-oxidized.sh`, o ambiente pode seguir diretamente para
 - `02-configure-oxidized.sh` — inventário por host com histórico em **Git**.
 - `03-configure-oxidized-groups-files.sh` — inventário por **grupo/cliente** com arquivos atuais separados por pasta.
 - `04-configure-oxidized-groups-git-and-files.sh` — inventário por **grupo/cliente**, histórico e diff em **Git** e cópia atual em arquivo para facilitar SCP/WinSCP.
+- `05-install-ios-dr-model.sh` — instala o modelo Cisco IOS DR-ready validado no LAB, mantendo `ios` como model padrão dos nodes Cisco.
 
-O script `04` é independente dos scripts `02` e `03`: o fluxo pode ser diretamente `01 -> 04`.
+O script `04` é independente dos scripts `02` e `03`: o fluxo pode ser diretamente `01 -> 04`. Para ambientes com Cisco IOS, o fluxo recomendado passa a ser `01 -> 04 -> 05`.
 
 
 ## O que este projeto demonstra | What this project demonstrates
